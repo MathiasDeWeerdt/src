@@ -18,31 +18,16 @@ import com.singlecore.scripts.treechopper.data.Constants;
 import com.singlecore.scripts.treechopper.nodes.Bank;
 import com.singlecore.scripts.treechopper.nodes.Chop;
 
-@ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0)
+@ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.01)
 public class TreeChopper extends Script implements MessageListener {
 
-	ArrayList<AbstractNode> nodes = new ArrayList<AbstractNode>();
-	
-	Time time = new Time();
+	private ArrayList<AbstractNode> nodes = new ArrayList<AbstractNode>();
+	private Time time = new Time();
 	
 	public void onStart() {
 		nodes.add(new Bank(this));
 		nodes.add(new Chop(this));
-		
 		Constants.startXp = this.getSkills().getExperience(Skill.WOODCUTTING);
-
-		log("TreeChopper started - By Single Core. ");
-	}
-
-	public void onExit() {
-		log("TreeChopper stopped - Please report any bugs on the forums. ");
-	}
-
-	public void onMessage(Message msg) {
-		final String m = msg.getMessage();
-		if (m.contains("You get some")) {
-			Constants.logsChopped++;
-		}
 	}
 
 	@Override
@@ -54,6 +39,13 @@ public class TreeChopper extends Script implements MessageListener {
 			}
 		}
 		return 100;
+	}
+	
+	public void onMessage(Message msg) {
+		final String m = msg.getMessage();
+		if (m.contains("You get some")) {
+			Constants.logsChopped++;
+		}
 	}
 
 	public void onPaint(Graphics2D g) {

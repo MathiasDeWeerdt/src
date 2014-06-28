@@ -55,7 +55,6 @@ public class Bank extends AbstractNode {
 		return "Banking node";
 	}
 
-	// Doesn't seem to be included in the rs07 API.
 	public void depositAllExcept(int id) {
 		if (script.getBank().isOpen()) {
 			Item[] items = script.getInventory().getItems();
