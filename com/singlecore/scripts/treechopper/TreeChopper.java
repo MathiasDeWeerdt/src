@@ -49,16 +49,13 @@ public class TreeChopper extends Script implements MessageListener {
 	}
 
 	public void onPaint(Graphics2D g) {
-
 		int gainedxp = this.getSkills().getExperience(Skill.WOODCUTTING) - Constants.startXp;
-
 		g.setColor(color1);
 		g.fillRoundRect(287, 233, 220, 97, 8, 8);
 		g.setColor(color2);
 		g.setStroke(stroke1);
 		g.drawRoundRect(287, 233, 220, 97, 8, 8);
 		g.setFont(font1);
-
 		g.drawString("Runtime: " + time.display(), 300, 255);
 		g.drawString("Logs(hr): " + Constants.logsChopped + "(" + time.calculatePerHour(Constants.logsChopped) + ")", 300, 275);
 		g.drawString("Exp(hr): " + gainedxp + "(" + time.calculatePerHour(gainedxp) + ")", 300, 295);
