@@ -17,8 +17,8 @@ public class Time {
 		return (String.valueOf(f).length() == 1) ? 0 + "" + f : "" + f;
 	}
 	
-	public String timeTillNewLevel(int xpTNL, int xpHour) {
-		long Tmillis = (long) ((xpTNL / (xpHour / 3600)) * 1000);
+	public String timeTillNewLevel(int xpTNL, float f) {
+		long Tmillis = (long) ((xpTNL / (f / 3600)) * 1000);
 		long Thours = Tmillis / 3600000;
 		Tmillis -= Thours * 3600000;
 		long Tminutes = Tmillis / 60000;

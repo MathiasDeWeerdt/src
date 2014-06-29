@@ -99,7 +99,7 @@ public class TreeChopper extends Script implements MessageListener {
 		g.setColor(color2);
 		g.drawString("Runtime: " + time.display(), 20, 326);
 		g.drawString("Exp(hr): " + gainedxp + "(" + time.calculatePerHour(gainedxp) + ")", 130, 326);
-		g.drawString("TTNL: 00:00:00", 260, 326);
+		g.drawString("TTNL: " + time.timeTillNewLevel(getSkills().experienceToLevel(Skill.WOODCUTTING), time.calculatePerHour(gainedxp)), 260, 326);
 		g.drawString("Logs: " + Constants.logsChopped + "(" + time.calculatePerHour(Constants.logsChopped) + ")", 370, 326);
 		g.drawString("" + 0 + "%", 480,326);
 
