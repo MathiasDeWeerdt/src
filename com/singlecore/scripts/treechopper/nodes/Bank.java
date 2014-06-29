@@ -10,7 +10,7 @@ import com.singlecore.scripts.treechopper.data.Constants;
 
 public class Bank extends AbstractNode {
 
-	Timer time = new Timer(MethodProvider.random(1800, 2600));
+	Timer time = new Timer(MethodProvider.random(1200, 1600));
 
 	public Bank(Script script) {
 		super(script);
@@ -43,11 +43,6 @@ public class Bank extends AbstractNode {
 		}
 
 		depositAllExcept(Constants.AXE);
-		time.reset();
-		while (script.getInventory().contains(Constants.LOGS)
-				&& time.isRunning()) {
-			MethodProvider.sleep(100);
-		}
 	}
 
 	@Override
