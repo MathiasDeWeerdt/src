@@ -48,6 +48,7 @@ public class TreeChopper extends Script implements MessageListener {
 		}
 	}
 
+	/*
 	public void onPaint(Graphics2D g) {
 		int gainedxp = this.getSkills().getExperience(Skill.WOODCUTTING) - Constants.startXp;
 		g.setColor(color1);
@@ -66,4 +67,54 @@ public class TreeChopper extends Script implements MessageListener {
 	private final Color color2 = new Color(0, 0, 0);
 	private final BasicStroke stroke1 = new BasicStroke(1);
 	private final Font font1 = new Font("Arial", 0, 14);
+	*/
+	
+	public void onPaint(Graphics2D g1) {
+		
+		int gainedxp = this.getSkills().getExperience(Skill.WOODCUTTING) - Constants.startXp;
+		
+		Graphics2D g = (Graphics2D) g1;
+
+		g.setColor(color1);
+		g.fillRect(9, 311, 500, 21);
+		g.setColor(color2);
+		g.setStroke(stroke1);
+		g.drawRect(9, 311, 500, 21);
+
+		g.setColor(new Color(255, 0, 0, 130));
+		//g.setColor(new Color(0, 255, 0, 130));
+		//g.setColor(new Color(0, 0, 255, 130));
+		//g.setColor(new Color(255, 255, 255, 130));
+
+		//Percentage to next level
+		g.fillRect(9, 311, 500 / 100 * 0, 21);
+		g.setColor(color2);
+		g.setStroke(stroke1);
+		g.drawRect(9, 311, 500, 21);
+
+		g.setFont(font2);
+		// g.setColor(Color.BLACK);
+		// g.drawString("wc Level: " + 0, 120, 380);
+		g.setFont(font1);
+		g.setColor(color2);
+		g.drawString("Runtime: " + time.display(), 20, 326);
+		g.drawString("Exp(hr): " + gainedxp + "(" + time.calculatePerHour(gainedxp) + ")", 130, 326);
+		g.drawString("TTNL: 00:00:00", 260, 326);
+		g.drawString("Logs: " + Constants.logsChopped + "(" + time.calculatePerHour(Constants.logsChopped) + ")", 370, 326);
+		g.drawString("" + 0 + "%", 480,326);
+
+		g.setColor(Color.BLACK);
+		g.drawString("Made by: Single Core", 392, 360);
+		g.drawString("Version: " + 0.01, 10, 360);
+	}
+	
+	public static final Color color1 = new Color(0, 0, 0, 150);
+	public static final Color color2 = new Color(255, 255, 255);
+	public static final Color color3 = new Color(255, 0, 0, 130);
+	public static final Color color4 = new Color(255, 0, 0, 255);
+
+	public static final BasicStroke stroke1 = new BasicStroke(1);
+	public static final Font font1 = new Font("Arial", 0, 11);
+	public static final Font font2 = new Font("Trebuchet", 0, 30);
+
 }
