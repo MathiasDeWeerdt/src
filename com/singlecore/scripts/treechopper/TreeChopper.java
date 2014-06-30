@@ -15,8 +15,10 @@ import org.osbot.rs07.script.ScriptManifest;
 import com.singlecore.api.Time;
 import com.singlecore.core.AbstractNode;
 import com.singlecore.scripts.treechopper.data.Constants;
+import com.singlecore.scripts.treechopper.gui.UI;
 import com.singlecore.scripts.treechopper.nodes.Bank;
 import com.singlecore.scripts.treechopper.nodes.Chop;
+import com.singlecore.scripts.treechopper.nodes.Drop;
 
 @ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.01)
 public class TreeChopper extends Script implements MessageListener {
@@ -24,9 +26,22 @@ public class TreeChopper extends Script implements MessageListener {
 	private ArrayList<AbstractNode> nodes = new ArrayList<AbstractNode>();
 	private Time time = new Time();
 	
-	public void onStart() {
+	public void onStart() throws InterruptedException {
+		
+		UI gui = new UI();
+		gui.setVisible(true);
+		while(gui.isVisible()) {
+			sleep(100);
+		}
+		
+		log("Option Selected: " + Constants.TREE_AREA_SELECTED.toString());
+		log("Axe Selected: " + Constants.selectedAxe);
+		log("Tree Selected: " + Constants.selectedTree);
+		
 		nodes.add(new Bank(this));
 		nodes.add(new Chop(this));
+		nodes.add(new Drop(this));
+		
 		Constants.startXp = this.getSkills().getExperience(Skill.WOODCUTTING);
 	}
 
@@ -106,6 +121,7 @@ public class TreeChopper extends Script implements MessageListener {
 		g.setColor(Color.BLACK);
 		g.drawString("Made by: Single Core", 392, 360);
 		g.drawString("Version: " + 0.01, 10, 360);
+		g.drawString("Status: " + Constants.status, 10, 380);
 	}
 	
 	public static final Color color1 = new Color(0, 0, 0, 150);

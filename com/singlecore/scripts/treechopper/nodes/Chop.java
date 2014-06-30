@@ -19,15 +19,14 @@ public class Chop extends AbstractNode {
 	@Override
 	public boolean activate() throws InterruptedException {
 		return !script.getInventory().isFull()
-				&& script.getInventory().contains(Constants.AXE)
-				|| script.getEquipment().contains(Constants.AXE);
+				&& script.getInventory().contains(Constants.selectedAxe)
+				|| script.getEquipment().contains(Constants.selectedAxe);
 	}
 
 	@Override
 	public void execute() throws InterruptedException {
+		RS2Object tree = script.getObjects().closest(Constants.TREE_AREA_SELECTED, Constants.selectedTree);
 		if (!script.myPlayer().isAnimating()) {
-			RS2Object tree = script.getObjects().closest(Constants.TREE_AREA,
-					Constants.TREES);
 			if (tree != null) {
 				if (tree.interact("Chop Down")) {
 					time.reset();

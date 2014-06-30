@@ -1,0 +1,68 @@
+JFDML JFormDesigner: "5.2.0.0.109" Java: "1.7.0_60" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, par l:::p {seq {comp checkBox1:::p::p, space :::p, comp textField1::::130:x}, seq {par l {comp label1::l:p::p, comp label2::l:p::p}, space :::p, par l:::p {comp comboBox1::::163:x, comp comboBox2::::163:x}}}, space ::81:x, comp button1:::p::p, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, par b {comp label1::b:p::p, comp comboBox1::b:p::p}, space :::p, par b {comp label2::b:p::p, comp comboBox2::b:p::p}, space :::x}, seq t {space ::95:x, par b {comp button1::b:p::p, comp checkBox1::b:p::p, comp textField1::b:p::p}, space :::p}}"
+		} ) {
+			name: "this"
+			"title": "AIO TreeChopper - By Single Core"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Options: "
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox1"
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "Varrock-East | Logs"
+					addElement( "Varrock-East | Logs" )
+					addElement( "Varrock-East | Oaks" )
+					addElement( "Varrock-West | Logs" )
+					addElement( "Varrock-West | Oaks" )
+					addElement( "Seers | Yews" )
+					addElement( "Seers | Maples" )
+					addElement( "Seers | Magics" )
+					addElement( "Draynor | Willows" )
+					addElement( "Edgeville | Yews" )
+				}
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Axe: "
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox2"
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "Bronze"
+					addElement( "Bronze" )
+					addElement( "Iron" )
+					addElement( "Steel" )
+					addElement( "Black" )
+					addElement( "Mithril" )
+					addElement( "Adamant" )
+					addElement( "Rune" )
+					addElement( "Dragon" )
+				}
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "checkBox1"
+				"text": "Powerchop"
+				addEvent( new FormEvent( "javax.swing.event.ChangeListener", "stateChanged", "checkBox1StateChanged", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Start"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+				"text": "Yew"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 385, 165 )
+		} )
+	}
+}
