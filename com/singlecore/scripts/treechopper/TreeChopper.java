@@ -62,27 +62,6 @@ public class TreeChopper extends Script implements MessageListener {
 			Constants.logsChopped++;
 		}
 	}
-
-	/*
-	public void onPaint(Graphics2D g) {
-		int gainedxp = this.getSkills().getExperience(Skill.WOODCUTTING) - Constants.startXp;
-		g.setColor(color1);
-		g.fillRoundRect(287, 233, 220, 97, 8, 8);
-		g.setColor(color2);
-		g.setStroke(stroke1);
-		g.drawRoundRect(287, 233, 220, 97, 8, 8);
-		g.setFont(font1);
-		g.drawString("Runtime: " + time.display(), 300, 255);
-		g.drawString("Logs(hr): " + Constants.logsChopped + "(" + time.calculatePerHour(Constants.logsChopped) + ")", 300, 275);
-		g.drawString("Exp(hr): " + gainedxp + "(" + time.calculatePerHour(gainedxp) + ")", 300, 295);
-		g.drawString("Status: " + Constants.status, 300, 315);
-	}
-	
-	private final Color color1 = new Color(140, 200, 20, 140);
-	private final Color color2 = new Color(0, 0, 0);
-	private final BasicStroke stroke1 = new BasicStroke(1);
-	private final Font font1 = new Font("Arial", 0, 14);
-	*/
 	
 	public void onPaint(Graphics2D g1) {
 		
@@ -97,9 +76,6 @@ public class TreeChopper extends Script implements MessageListener {
 		g.drawRect(9, 311, 500, 21);
 
 		g.setColor(new Color(255, 0, 0, 130));
-		//g.setColor(new Color(0, 255, 0, 130));
-		//g.setColor(new Color(0, 0, 255, 130));
-		//g.setColor(new Color(255, 255, 255, 130));
 
 		//Percentage to next level
 		g.fillRect(9, 311, 500 / 100 * 0, 21);
@@ -108,8 +84,6 @@ public class TreeChopper extends Script implements MessageListener {
 		g.drawRect(9, 311, 500, 21);
 
 		g.setFont(font2);
-		// g.setColor(Color.BLACK);
-		// g.drawString("wc Level: " + 0, 120, 380);
 		g.setFont(font1);
 		g.setColor(color2);
 		g.drawString("Runtime: " + time.display(), 20, 326);
