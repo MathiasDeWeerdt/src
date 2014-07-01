@@ -1,6 +1,7 @@
 package com.singlecore.scripts.treechopper.nodes;
 
 import org.osbot.rs07.api.model.Item;
+import org.osbot.rs07.api.model.RS2Object;
 import org.osbot.rs07.script.MethodProvider;
 import org.osbot.rs07.script.Script;
 
@@ -26,10 +27,13 @@ public class Bank extends AbstractNode {
 	@Override
 	public void execute() throws InterruptedException {
 		if (!script.getBank().isOpen()) {
-			if (script.getBank().open()) {
-				time.reset();
-				while (!script.getBank().isOpen() && time.isRunning()) {
-					MethodProvider.sleep(100);
+			RS2Object bank = script.getObjects().closestThatContains("Bank Booth");
+			if(bank != null) {
+				if (bank.interact("Bank")) {
+					time.reset();
+					while (!script.getBank().isOpen() && time.isRunning()) {
+						MethodProvider.sleep(100);
+					}
 				}
 			}
 		}
@@ -57,7 +61,7 @@ public class Bank extends AbstractNode {
 		return "Banking node";
 	}
 
-	public void depositAllExcept(int id) {
+	public void depositAllExcept(int id) throws InterruptedException {
 		if (script.getBank().isOpen()) {
 			Item[] items = script.getInventory().getItems();
 
@@ -65,6 +69,10 @@ public class Bank extends AbstractNode {
 				if (item != null) {
 					if (item.getId() != id) {
 						script.getBank().deposit(item.getId(), 28);
+						time.reset();
+						while(script.getInventory().contains(item.getId()) && time.isRunning()) {
+							MethodProvider.sleep(100);
+						}
 					}
 				}
 			}
