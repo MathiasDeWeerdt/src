@@ -26,22 +26,21 @@ public class Bank extends AbstractNode {
 	@Override
 	public void execute() throws InterruptedException {
 		if (!script.getBank().isOpen()) {
-			script.getBank().open();
-			time.reset();
-			while (!script.getBank().isOpen() && time.isRunning()) {
-				MethodProvider.sleep(100);
+			if (script.getBank().open()) {
+				time.reset();
+				while (!script.getBank().isOpen() && time.isRunning()) {
+					MethodProvider.sleep(100);
+				}
 			}
 		}
 		
 		depositAllExcept(Constants.selectedAxe);
 
 		if (!script.getInventory().contains(Constants.selectedAxe) && !script.getEquipment().contains(Constants.selectedAxe)) {
-			
-			if(!script.getBank().contains(Constants.selectedAxe)) {
+			if (!script.getBank().contains(Constants.selectedAxe)) {
 				script.log("No axe in your bank!");
 				script.stop();
 			}
-			
 			script.getBank().withdraw(Constants.selectedAxe, 1);
 			time.reset();
 			while (!script.getInventory().contains(Constants.selectedAxe)
@@ -49,6 +48,8 @@ public class Bank extends AbstractNode {
 				MethodProvider.sleep(100);
 			}
 		}
+		
+		script.getBank().close();
 	}
 
 	@Override

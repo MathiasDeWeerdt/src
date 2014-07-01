@@ -20,7 +20,7 @@ import com.singlecore.scripts.treechopper.nodes.Bank;
 import com.singlecore.scripts.treechopper.nodes.Chop;
 import com.singlecore.scripts.treechopper.nodes.Drop;
 
-@ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.01)
+@ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.02)
 public class TreeChopper extends Script implements MessageListener {
 
 	private ArrayList<AbstractNode> nodes = new ArrayList<AbstractNode>();
@@ -60,6 +60,9 @@ public class TreeChopper extends Script implements MessageListener {
 		final String m = msg.getMessage();
 		if (m.contains("You get some")) {
 			Constants.logsChopped++;
+		} else if(m.contains("nest")) {
+			Constants.pickupNest = true;
+			Constants.nestsFound++;
 		}
 	}
 	
@@ -94,8 +97,9 @@ public class TreeChopper extends Script implements MessageListener {
 
 		g.setColor(Color.BLACK);
 		g.drawString("Made by: Single Core", 392, 360);
-		g.drawString("Version: " + 0.01, 10, 360);
+		g.drawString("Version: " + 0.02, 10, 360);
 		g.drawString("Status: " + Constants.status, 10, 380);
+		g.drawString("Nests: " + Constants.nestsFound, 10, 400);
 	}
 	
 	public static final Color color1 = new Color(0, 0, 0, 150);

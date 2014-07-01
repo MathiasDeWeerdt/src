@@ -27,13 +27,14 @@ public class Constants {
 	public static Area TREE_AREA_SELECTED = null;
 	
 	public static boolean powerChop = false;
+	public static boolean pickupNest = false;
 	
 	public static final String TREE = "Tree";
 	public static final String OAK = "Oak";
 	public static final String WILLOW = "Willow";
-	public static final String MAPLE = "Maple";
+	public static final String MAPLE = "Maple Tree";
 	public static final String YEW = "Yew";
-	public static final String MAGIC = "Magic";
+	public static final String MAGIC = "Magic Tree";
 	
 	public static String selectedTree = "";
 	
@@ -48,6 +49,7 @@ public class Constants {
 	public static int selectedAxe = 1359;
 	
 	public static int logsChopped;
+	public static int nestsFound;
 	public static int startXp;
 	
 	public static String treeName = "Willow";

@@ -67,6 +67,10 @@ public class UI extends JFrame {
 			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
 			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_YEW;
 			Constants.selectedTree = Constants.YEW;
+		} else if(comboBox1.getSelectedItem().toString().equals("Seers | Willows")) {
+			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
+			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_MAPLE;
+			Constants.selectedTree = Constants.WILLOW;
 		} else if(comboBox1.getSelectedItem().toString().equals("Seers | Maples")) {
 			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
 			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_MAPLE;
@@ -124,6 +128,7 @@ public class UI extends JFrame {
 			"Varrock-West | Logs",
 			"Varrock-West | Oaks",
 			"Seers | Yews",
+			"Seers | Willows",
 			"Seers | Maples",
 			"Seers | Magics",
 			"Draynor | Willows",
@@ -164,7 +169,11 @@ public class UI extends JFrame {
 		});
 
 		//---- textField1 ----
-		textField1.setText("Yew");
+		textField1.setText("TreeName");
+		
+		
+		//----- Defaults -----
+		comboBox2.setSelectedIndex(6);
 
 		GroupLayout contentPaneLayout = new GroupLayout(contentPane);
 		contentPane.setLayout(contentPaneLayout);

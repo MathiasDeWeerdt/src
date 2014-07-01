@@ -21,7 +21,7 @@ public class Drop extends AbstractNode {
 
 	@Override
 	public void execute() throws InterruptedException {
-		script.getInventory().dropAll(1519);
+		script.getInventory().dropForNameThatContains("logs");
 	}
 
 	@Override
