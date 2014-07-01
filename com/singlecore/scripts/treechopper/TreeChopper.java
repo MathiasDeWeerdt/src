@@ -34,9 +34,22 @@ public class TreeChopper extends Script implements MessageListener {
 			sleep(100);
 		}
 		
+		try {
+			log("Getting log prices from zybez, this may take a few seconds - PLEASE WAIT !");
+			Constants.setPrices();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		log("Option Selected: " + Constants.TREE_AREA_SELECTED.toString());
 		log("Axe Selected: " + Constants.selectedAxe);
 		log("Tree Selected: " + Constants.selectedTree);
+		log("Logs: " + Constants.LOG_PRICE);
+		log("Oaks: " + Constants.OAK_PRICE);
+		log("Willows: " + Constants.WILLOW_PRICE);
+		log("Yews: " + Constants.YEW_PRICE);
+		log("Magics: " + Constants.MAGIC_PRICE);
+		
 		
 		nodes.add(new Bank(this));
 		nodes.add(new Chop(this));
@@ -97,6 +110,8 @@ public class TreeChopper extends Script implements MessageListener {
 
 		g.setColor(Color.BLACK);
 		g.drawString("Made by: Single Core", 392, 360);
+		g.drawString("$ Made: " + Constants.logsChopped*Constants.YEW_PRICE + "(" + Constants.YEW_PRICE + ")", 392, 380);
+		g.drawString("$ Hour: " + time.calculatePerHour(Constants.logsChopped*Constants.YEW_PRICE), 392, 400);
 		g.drawString("Version: " + 0.02, 10, 360);
 		g.drawString("Status: " + Constants.status, 10, 380);
 		g.drawString("Nests: " + Constants.nestsFound, 10, 400);

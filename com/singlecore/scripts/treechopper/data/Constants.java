@@ -2,6 +2,8 @@ package com.singlecore.scripts.treechopper.data;
 
 import org.osbot.rs07.utility.Area;
 
+import com.singlecore.api.PriceChecker;
+
 public class Constants {
 
 	public static final Area BANK_AREA_VWEST = new Area(3179, 3448, 3191, 3432);
@@ -35,6 +37,22 @@ public class Constants {
 	public static final String MAPLE = "Maple Tree";
 	public static final String YEW = "Yew";
 	public static final String MAGIC = "Magic Tree";
+	
+	public static int LOG_PRICE = 0;
+	public static int OAK_PRICE = 0;
+	public static int WILLOW_PRICE = 0;
+	public static int MAPLE_PRICE = 0;
+	public static int YEW_PRICE = 0;
+	public static int MAGIC_PRICE = 0;
+	
+	public static void setPrices() throws Exception {
+		LOG_PRICE = PriceChecker.LOGS.getPrice();
+		OAK_PRICE = PriceChecker.OAK_LOGS.getPrice();
+		WILLOW_PRICE = PriceChecker.WILLOW_LOGS.getPrice();
+		MAPLE_PRICE = PriceChecker.MAPLE_LOGS.getPrice();
+		YEW_PRICE = PriceChecker.YEW_LOGS.getPrice();
+		MAGIC_PRICE = PriceChecker.MAGIC_LOGS.getPrice();
+	}
 	
 	public static String selectedTree = "";
 	
