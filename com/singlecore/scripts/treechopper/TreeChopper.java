@@ -13,14 +13,17 @@ import org.osbot.rs07.script.Script;
 import org.osbot.rs07.script.ScriptManifest;
 
 import com.singlecore.api.Time;
+import com.singlecore.api.XpDistance;
 import com.singlecore.core.AbstractNode;
 import com.singlecore.scripts.treechopper.data.Constants;
 import com.singlecore.scripts.treechopper.gui.UI;
 import com.singlecore.scripts.treechopper.nodes.Bank;
 import com.singlecore.scripts.treechopper.nodes.Chop;
 import com.singlecore.scripts.treechopper.nodes.Drop;
+import com.singlecore.scripts.treechopper.nodes.Ent;
+import com.singlecore.scripts.treechopper.nodes.Walk;
 
-@ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.02)
+@ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.04)
 public class TreeChopper extends Script implements MessageListener {
 
 	private ArrayList<AbstractNode> nodes = new ArrayList<AbstractNode>();
@@ -28,29 +31,20 @@ public class TreeChopper extends Script implements MessageListener {
 	
 	public void onStart() throws InterruptedException {
 		
-		UI gui = new UI();
+		UI gui = new UI(this);
 		gui.setVisible(true);
 		while(gui.isVisible()) {
 			sleep(100);
 		}
 		
-		try {
-			log("Getting log prices from zybez, this may take a few seconds - PLEASE WAIT !");
-			Constants.setPrices();
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(!Constants.powerChop) {
+			log("Option Selected: " + Constants.TREE_AREA_SELECTED.toString());
+			log("Axe Selected: " + Constants.selectedAxe);
 		}
-		
-		log("Option Selected: " + Constants.TREE_AREA_SELECTED.toString());
-		log("Axe Selected: " + Constants.selectedAxe);
 		log("Tree Selected: " + Constants.selectedTree);
-		log("Logs: " + Constants.LOG_PRICE);
-		log("Oaks: " + Constants.OAK_PRICE);
-		log("Willows: " + Constants.WILLOW_PRICE);
-		log("Yews: " + Constants.YEW_PRICE);
-		log("Magics: " + Constants.MAGIC_PRICE);
 		
-		
+		nodes.add(new Ent(this));
+		nodes.add(new Walk(this));
 		nodes.add(new Bank(this));
 		nodes.add(new Chop(this));
 		nodes.add(new Drop(this));
@@ -73,7 +67,7 @@ public class TreeChopper extends Script implements MessageListener {
 		final String m = msg.getMessage();
 		if (m.contains("You get some")) {
 			Constants.logsChopped++;
-		} else if(m.contains("nest")) {
+		} else if(m.contains("nest falls out of the")) {
 			Constants.pickupNest = true;
 			Constants.nestsFound++;
 		}
@@ -91,10 +85,10 @@ public class TreeChopper extends Script implements MessageListener {
 		g.setStroke(stroke1);
 		g.drawRect(9, 311, 500, 21);
 
-		g.setColor(new Color(255, 0, 0, 130));
+		g.setColor(new Color(0, 255, 0, 80));
 
 		//Percentage to next level
-		g.fillRect(9, 311, 500 / 100 * 0, 21);
+		g.fillRect(9, 311, 500 / 100 * (100 - XpDistance.getPercentageUntilNextLevelFromCurrentLevel(this, Skill.WOODCUTTING)), 21);
 		g.setColor(color2);
 		g.setStroke(stroke1);
 		g.drawRect(9, 311, 500, 21);
@@ -106,13 +100,17 @@ public class TreeChopper extends Script implements MessageListener {
 		g.drawString("Exp(hr): " + gainedxp + "(" + time.calculatePerHour(gainedxp) + ")", 130, 326);
 		g.drawString("TTNL: " + time.timeTillNewLevel(getSkills().experienceToLevel(Skill.WOODCUTTING), time.calculatePerHour(gainedxp)), 260, 326);
 		g.drawString("Logs: " + Constants.logsChopped + "(" + time.calculatePerHour(Constants.logsChopped) + ")", 370, 326);
-		g.drawString("" + 0 + "%", 480,326);
+		g.drawString(100 - XpDistance.getPercentageUntilNextLevelFromCurrentLevel(this, Skill.WOODCUTTING) + "%", 480,326);
 
 		g.setColor(Color.BLACK);
 		g.drawString("Made by: Single Core", 392, 360);
-		g.drawString("$ Made: " + Constants.logsChopped*Constants.YEW_PRICE + "(" + Constants.YEW_PRICE + ")", 392, 380);
-		g.drawString("$ Hour: " + time.calculatePerHour(Constants.logsChopped*Constants.YEW_PRICE), 392, 400);
-		g.drawString("Version: " + 0.02, 10, 360);
+		
+		if(!Constants.powerChop) {
+			g.drawString("$ Made: " + Constants.logsChopped*Constants.SELECTED_PRICE + "(" + Constants.SELECTED_PRICE + ")", 392, 380);
+			g.drawString("$ Hour: " + time.calculatePerHour(Constants.logsChopped*Constants.SELECTED_PRICE), 392, 400);
+		}
+		
+		g.drawString("Version: " + 0.04, 10, 360);
 		g.drawString("Status: " + Constants.status, 10, 380);
 		g.drawString("Nests: " + Constants.nestsFound, 10, 400);
 	}

@@ -9,7 +9,7 @@ import com.singlecore.core.AbstractNode;
 import com.singlecore.scripts.treechopper.data.Constants;
 
 public class Nest extends AbstractNode {
-	
+
 	Timer time = new Timer(2000);
 
 	public Nest(Script script) {
@@ -18,21 +18,25 @@ public class Nest extends AbstractNode {
 
 	@Override
 	public boolean activate() throws InterruptedException {
-		return Constants.pickupNest;
+		return Constants.pickupNest && !script.getInventory().isFull();
 	}
 
 	@Override
 	public void execute() throws InterruptedException {
-		GroundItem nest = script.getGroundItems().closestThatContains("nest");
-		if(nest != null) {
-			if(nest.interact("Take")) {
+		GroundItem nest = script.getGroundItems().closestThatContains(
+				"Bird nest");
+		
+		if (nest != null) {
+			if (nest.interact("Take")) {
 				time.reset();
-				while(time.isRunning() && nest != null) {
+				while (time.isRunning() && nest != null) {
 					MethodProvider.sleep(50);
 				}
 			}
 		}
-		Constants.pickupNest = false;
+		
+		if (nest == null)
+			Constants.pickupNest = false;
 	}
 
 	@Override

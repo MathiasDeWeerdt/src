@@ -18,9 +18,10 @@ public class Chop extends AbstractNode {
 
 	@Override
 	public boolean activate() throws InterruptedException {
-		return !script.getInventory().isFull()
-				&& script.getInventory().contains(Constants.selectedAxe)
-				|| script.getEquipment().contains(Constants.selectedAxe);
+		if (script.getInventory().contains(Constants.selectedAxe) || script.getEquipment().contains(Constants.selectedAxe)) {
+			return !script.getInventory().isFull() && Constants.TREE_AREA_SELECTED.contains(script.myPlayer());
+		}
+		return false;
 	}
 
 	@Override

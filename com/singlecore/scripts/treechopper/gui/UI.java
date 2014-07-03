@@ -10,6 +10,10 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+import org.osbot.rs07.script.Script;
+import org.osbot.rs07.utility.Area;
+
+import com.singlecore.api.PriceChecker;
 import com.singlecore.scripts.treechopper.data.Constants;
 
 /**
@@ -20,73 +24,94 @@ public class UI extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	public UI() {
+	private Script script;
+	
+	public UI(Script script) {
+		this.script = script;
 		initComponents();
 	}
 
-	private void button1ActionPerformed(ActionEvent e) {
+	private void button1ActionPerformed(ActionEvent e) throws Exception {
 		if (checkBox1.isSelected()) {
 			Constants.powerChop = true;
 			Constants.treeName = textField1.getText();
-		}
-		
-		if(comboBox2.getSelectedItem().toString().equals("Bronze")) {
-			Constants.selectedAxe = Constants.BRONZE_AXE;
-		} else if(comboBox2.getSelectedItem().toString().equals("Iron")) {
-			Constants.selectedAxe = Constants.IRON_AXE;
-		} else if(comboBox2.getSelectedItem().toString().equals("Steel")) {
-			Constants.selectedAxe = Constants.STEEL_AXE;
-		} else if(comboBox2.getSelectedItem().toString().equals("Black")) {
-			Constants.selectedAxe = Constants.BLACK_AXE;
-		} else if(comboBox2.getSelectedItem().toString().equals("Mithril")) {
-			Constants.selectedAxe = Constants.MITHRIL_AXE;
-		} else if(comboBox2.getSelectedItem().toString().equals("Adamant")) {
-			Constants.selectedAxe = Constants.ADAMANT_AXE;
-		} else if(comboBox2.getSelectedItem().toString().equals("Rune")) {
-			Constants.selectedAxe = Constants.RUNE_AXE;
-		}
-		
-		if(comboBox1.getSelectedItem().toString().equals("Varrock-East | Logs")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_VEAST;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_VEAST;
-			Constants.selectedTree = Constants.TREE;
-		} else if(comboBox1.getSelectedItem().toString().equals("Varrock-East | Oaks")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_VWEST;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_VWEST;
-			Constants.selectedTree = Constants.OAK;
-		}  else if(comboBox1.getSelectedItem().toString().equals("Varrock-West | Logs")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_VWEST;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_VWEST;
-			Constants.selectedTree = Constants.TREE;
-		} else if(comboBox1.getSelectedItem().toString().equals("Varrock-West | Oaks")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_VWEST;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_VWEST;
-			Constants.selectedTree = Constants.OAK;
-		} else if(comboBox1.getSelectedItem().toString().equals("Seers | Yews")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_YEW;
-			Constants.selectedTree = Constants.YEW;
-		} else if(comboBox1.getSelectedItem().toString().equals("Seers | Willows")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_MAPLE;
-			Constants.selectedTree = Constants.WILLOW;
-		} else if(comboBox1.getSelectedItem().toString().equals("Seers | Maples")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_MAPLE;
-			Constants.selectedTree = Constants.MAPLE;
-		} else if(comboBox1.getSelectedItem().toString().equals("Seers | Magics")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_MAGIC_1;
-			Constants.selectedTree = Constants.MAGIC;
-		} else if(comboBox1.getSelectedItem().toString().equals("Draynor | Willows")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_DRAYNOR;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_DRAYNOR;
-			Constants.selectedTree = Constants.WILLOW;
-		} else if(comboBox1.getSelectedItem().toString().equals("Edgeville | Yews")) {
-			Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_EDGEVILLE;
-			Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_EDGEVILLE;
-			Constants.selectedTree = Constants.YEW;
+			Constants.selectedTree = textField1.getText();
+			
+			Constants.TREE_AREA_SELECTED = new Area(
+					(script.myPosition().getX() - 10),
+					(script.myPosition().getY() + 10),
+					(script.myPosition().getX() + 10),
+					(script.myPosition().getY() - 10)
+			);
+			
+		} else {
+			if(comboBox2.getSelectedItem().toString().equals("Bronze")) {
+				Constants.selectedAxe = Constants.BRONZE_AXE;
+			} else if(comboBox2.getSelectedItem().toString().equals("Iron")) {
+				Constants.selectedAxe = Constants.IRON_AXE;
+			} else if(comboBox2.getSelectedItem().toString().equals("Steel")) {
+				Constants.selectedAxe = Constants.STEEL_AXE;
+			} else if(comboBox2.getSelectedItem().toString().equals("Black")) {
+				Constants.selectedAxe = Constants.BLACK_AXE;
+			} else if(comboBox2.getSelectedItem().toString().equals("Mithril")) {
+				Constants.selectedAxe = Constants.MITHRIL_AXE;
+			} else if(comboBox2.getSelectedItem().toString().equals("Adamant")) {
+				Constants.selectedAxe = Constants.ADAMANT_AXE;
+			} else if(comboBox2.getSelectedItem().toString().equals("Rune")) {
+				Constants.selectedAxe = Constants.RUNE_AXE;
+			}
+			
+			if(comboBox1.getSelectedItem().toString().equals("Varrock-East | Logs")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_VEAST;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_VEAST;
+				Constants.selectedTree = Constants.TREE;
+				Constants.SELECTED_PRICE = PriceChecker.LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Varrock-East | Oaks")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_VEAST;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_VEAST;
+				Constants.selectedTree = Constants.OAK;
+				Constants.SELECTED_PRICE = PriceChecker.OAK_LOGS.getPrice();
+			}  else if(comboBox1.getSelectedItem().toString().equals("Varrock-West | Logs")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_VWEST;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_VWEST;
+				Constants.selectedTree = Constants.TREE;
+				Constants.SELECTED_PRICE = PriceChecker.LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Varrock-West | Oaks")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_VWEST;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_VWEST;
+				Constants.selectedTree = Constants.OAK;
+				Constants.SELECTED_PRICE = PriceChecker.OAK_LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Seers | Yews")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_YEW;
+				Constants.selectedTree = Constants.YEW;
+				Constants.SELECTED_PRICE = PriceChecker.YEW_LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Seers | Willows")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_MAPLE;
+				Constants.selectedTree = Constants.WILLOW;
+				Constants.SELECTED_PRICE = PriceChecker.WILLOW_LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Seers | Maples")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_MAPLE;
+				Constants.selectedTree = Constants.MAPLE;
+				Constants.SELECTED_PRICE = PriceChecker.MAPLE_LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Seers | Magics")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_SEERS;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_SEERS_MAGIC_1;
+				Constants.selectedTree = Constants.MAGIC;
+				Constants.SELECTED_PRICE = PriceChecker.MAGIC_LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Draynor | Willows")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_DRAYNOR;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_DRAYNOR;
+				Constants.selectedTree = Constants.WILLOW;
+				Constants.SELECTED_PRICE = PriceChecker.WILLOW_LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Edgeville | Yews")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_EDGEVILLE;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_EDGEVILLE;
+				Constants.selectedTree = Constants.YEW;
+				Constants.SELECTED_PRICE = PriceChecker.YEW_LOGS.getPrice();
+			}
 		}
 		
 		this.setVisible(false);
@@ -164,7 +189,11 @@ public class UI extends JFrame {
 		button1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				button1ActionPerformed(e);
+				try {
+					button1ActionPerformed(e);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 

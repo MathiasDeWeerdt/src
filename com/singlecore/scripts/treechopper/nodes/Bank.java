@@ -11,7 +11,7 @@ import com.singlecore.scripts.treechopper.data.Constants;
 
 public class Bank extends AbstractNode {
 
-	Timer time = new Timer(MethodProvider.random(1200, 1600));
+	Timer time = new Timer(2500);
 
 	public Bank(Script script) {
 		super(script);
@@ -19,9 +19,14 @@ public class Bank extends AbstractNode {
 
 	@Override
 	public boolean activate() throws InterruptedException {
-		return !Constants.powerChop && script.getInventory().isFull()
+		if(!Constants.powerChop) {
+		return script.getInventory().isFull()
 				|| !script.getInventory().contains(Constants.selectedAxe)
-				&& !script.getEquipment().contains(Constants.selectedAxe);
+				&& !script.getEquipment().contains(Constants.selectedAxe)
+				&& Constants.BANK_AREA_SELECTED.contains(script.myPlayer());
+		}
+		
+		return false;
 	}
 
 	@Override
@@ -63,15 +68,17 @@ public class Bank extends AbstractNode {
 
 	public void depositAllExcept(int id) throws InterruptedException {
 		if (script.getBank().isOpen()) {
-			Item[] items = script.getInventory().getItems();
 
-			for (Item item : items) {
-				if (item != null) {
-					if (item.getId() != id) {
-						script.getBank().deposit(item.getId(), 28);
-						time.reset();
-						while(script.getInventory().contains(item.getId()) && time.isRunning()) {
-							MethodProvider.sleep(100);
+			while(script.getInventory().getEmptySlots() < 10) {
+				Item[] items = script.getInventory().getItems();
+				for (Item item : items) {
+					if (item != null) {
+						if (item.getId() != -1 && item.getId() != id) {
+							script.getBank().deposit(item.getId(), 100);
+							time.reset();
+							while(script.getInventory().contains(item.getId()) && time.isRunning()) {
+								MethodProvider.sleep(100);
+							}
 						}
 					}
 				}

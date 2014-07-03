@@ -1,8 +1,7 @@
 package com.singlecore.scripts.treechopper.data;
 
+import org.osbot.rs07.api.map.Position;
 import org.osbot.rs07.utility.Area;
-
-import com.singlecore.api.PriceChecker;
 
 public class Constants {
 
@@ -28,6 +27,47 @@ public class Constants {
 	public static Area BANK_AREA_SELECTED = null;
 	public static Area TREE_AREA_SELECTED = null;
 	
+	public static final Position[] pathToMagics = new Position[] {
+			new Position(2725, 3490, 0),
+			new Position(2725, 3483, 0),
+			new Position(2725, 3479, 0),
+			new Position(2725, 3474, 0),
+			new Position(2725, 3469, 0),
+			new Position(2723, 3462, 0),
+			new Position(2723, 3455, 0),
+			new Position(2721, 3453, 0),
+			new Position(2719, 3447, 0),
+			new Position(2717, 3442, 0),
+			new Position(2713, 3438, 0),
+			new Position(2711, 3435, 0),
+			new Position(2707, 3431, 0),
+			new Position(2703, 3428, 0),
+			new Position(2700, 3424, 0),
+			new Position(2698, 3423, 0)
+	};
+	
+	public static final Position[] pathToBank = new Position[] {
+			new Position(2698, 3424, 0),
+			new Position(2701, 3429, 0),
+			new Position(2705, 3432, 0),
+			new Position(2705, 3437, 0),
+			new Position(2710, 3440, 0),
+			new Position(2710, 3441, 0),
+			new Position(2713, 3447, 0),
+			new Position(2716, 3450, 0),
+			new Position(2718, 3453, 0),
+			new Position(2721, 3456, 0),
+			new Position(2723, 3458, 0),
+			new Position(2725, 3462, 0),
+			new Position(2726, 3465, 0),
+			new Position(2726, 3471, 0),
+			new Position(2726, 3473, 0),
+			new Position(2726, 3478, 0),
+			new Position(2726, 3481, 0),
+			new Position(2728, 3485, 0),
+			new Position(2726, 3491, 0)
+	};
+	
 	public static boolean powerChop = false;
 	public static boolean pickupNest = false;
 	
@@ -38,21 +78,7 @@ public class Constants {
 	public static final String YEW = "Yew";
 	public static final String MAGIC = "Magic Tree";
 	
-	public static int LOG_PRICE = 0;
-	public static int OAK_PRICE = 0;
-	public static int WILLOW_PRICE = 0;
-	public static int MAPLE_PRICE = 0;
-	public static int YEW_PRICE = 0;
-	public static int MAGIC_PRICE = 0;
-	
-	public static void setPrices() throws Exception {
-		LOG_PRICE = PriceChecker.LOGS.getPrice();
-		OAK_PRICE = PriceChecker.OAK_LOGS.getPrice();
-		WILLOW_PRICE = PriceChecker.WILLOW_LOGS.getPrice();
-		MAPLE_PRICE = PriceChecker.MAPLE_LOGS.getPrice();
-		YEW_PRICE = PriceChecker.YEW_LOGS.getPrice();
-		MAGIC_PRICE = PriceChecker.MAGIC_LOGS.getPrice();
-	}
+	public static int SELECTED_PRICE = 0;
 	
 	public static String selectedTree = "";
 	
