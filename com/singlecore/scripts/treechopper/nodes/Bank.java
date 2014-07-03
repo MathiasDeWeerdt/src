@@ -1,5 +1,6 @@
 package com.singlecore.scripts.treechopper.nodes;
 
+import org.osbot.rs07.api.filter.Filter;
 import org.osbot.rs07.api.model.Item;
 import org.osbot.rs07.api.model.RS2Object;
 import org.osbot.rs07.script.MethodProvider;
@@ -29,6 +30,7 @@ public class Bank extends AbstractNode {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void execute() throws InterruptedException {
 		if (!script.getBank().isOpen()) {
@@ -43,7 +45,14 @@ public class Bank extends AbstractNode {
 			}
 		}
 		
-		depositAllExcept(Constants.selectedAxe);
+		script.getBank().depositAll(new Filter<Item>() {
+
+			@Override
+			public boolean match(Item item) {
+				return item != null && !item.getName().contains("axe");
+			}
+			
+		});
 
 		if (!script.getInventory().contains(Constants.selectedAxe) && !script.getEquipment().contains(Constants.selectedAxe)) {
 			if (!script.getBank().contains(Constants.selectedAxe)) {
@@ -64,28 +73,6 @@ public class Bank extends AbstractNode {
 	@Override
 	public String status() {
 		return "Banking node";
-	}
-
-	public void depositAllExcept(int id) throws InterruptedException {
-		if (script.getBank().isOpen()) {
-
-			while(script.getInventory().getEmptySlots() < 10) {
-				Item[] items = script.getInventory().getItems();
-				for (Item item : items) {
-					if (item != null) {
-						if (item.getId() != -1 && item.getId() != id) {
-							script.getBank().deposit(item.getId(), 100);
-							time.reset();
-							while(script.getInventory().contains(item.getId()) && time.isRunning()) {
-								MethodProvider.sleep(100);
-							}
-						}
-					}
-				}
-			}
-
-		}
-
 	}
 
 }
