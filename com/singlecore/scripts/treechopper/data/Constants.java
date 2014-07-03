@@ -69,7 +69,6 @@ public class Constants {
 	};
 	
 	public static boolean powerChop = false;
-	public static boolean pickupNest = false;
 	
 	public static final String TREE = "Tree";
 	public static final String OAK = "Oak";

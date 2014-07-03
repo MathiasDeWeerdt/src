@@ -21,6 +21,7 @@ import com.singlecore.scripts.treechopper.nodes.Bank;
 import com.singlecore.scripts.treechopper.nodes.Chop;
 import com.singlecore.scripts.treechopper.nodes.Drop;
 import com.singlecore.scripts.treechopper.nodes.Ent;
+import com.singlecore.scripts.treechopper.nodes.Nest;
 import com.singlecore.scripts.treechopper.nodes.Walk;
 
 @ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.04)
@@ -43,6 +44,7 @@ public class TreeChopper extends Script implements MessageListener {
 		}
 		log("Tree Selected: " + Constants.selectedTree);
 		
+		nodes.add(new Nest(this));
 		nodes.add(new Ent(this));
 		nodes.add(new Walk(this));
 		nodes.add(new Bank(this));
@@ -67,9 +69,6 @@ public class TreeChopper extends Script implements MessageListener {
 		final String m = msg.getMessage();
 		if (m.contains("You get some")) {
 			Constants.logsChopped++;
-		} else if(m.contains("nest falls out of the")) {
-			Constants.pickupNest = true;
-			Constants.nestsFound++;
 		}
 	}
 	

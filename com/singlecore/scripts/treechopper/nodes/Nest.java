@@ -1,6 +1,8 @@
 package com.singlecore.scripts.treechopper.nodes;
 
+import org.osbot.rs07.api.filter.Filter;
 import org.osbot.rs07.api.model.GroundItem;
+import org.osbot.rs07.api.model.Item;
 import org.osbot.rs07.script.MethodProvider;
 import org.osbot.rs07.script.Script;
 
@@ -18,13 +20,26 @@ public class Nest extends AbstractNode {
 
 	@Override
 	public boolean activate() throws InterruptedException {
-		return Constants.pickupNest && !script.getInventory().isFull();
+		GroundItem nest = script.getGroundItems().closestThatContains("nest");
+		return nest != null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void execute() throws InterruptedException {
 		GroundItem nest = script.getGroundItems().closestThatContains(
 				"Bird nest");
+		
+		if(script.getInventory().isFull()) {
+			script.getInventory().dropForFilter(new Filter<Item>() {
+				
+				@Override
+				public boolean match(Item item) {
+					return item != null && !item.getName().contains("axe");
+				}
+	
+			});
+		}
 		
 		if (nest != null) {
 			if (nest.interact("Take")) {
@@ -32,11 +47,9 @@ public class Nest extends AbstractNode {
 				while (time.isRunning() && nest != null) {
 					MethodProvider.sleep(50);
 				}
+				Constants.nestsFound++;
 			}
 		}
-		
-		if (nest == null)
-			Constants.pickupNest = false;
 	}
 
 	@Override
