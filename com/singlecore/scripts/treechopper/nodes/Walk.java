@@ -37,6 +37,8 @@ public class Walk extends AbstractNode {
 			if (!script.getInventory().isFull() && !Constants.TREE_AREA_SELECTED.contains(script.myPlayer())) {
 				if (Constants.selectedTree.equals(Constants.MAGIC)) {
 					walk.walkPath(Constants.pathToMagics);
+				} else if(Constants.BANK_AREA_CATHERBY.equals(Constants.BANK_AREA_SELECTED)) {
+					walk.walkPath(Constants.pathToYewsCath);
 				} else {
 					script.localWalker.walk(getCenterPosition(Constants.TREE_AREA_SELECTED, 0));
 				}
@@ -45,7 +47,9 @@ public class Walk extends AbstractNode {
 
 		if (script.getInventory().isFull() && !Constants.BANK_AREA_SELECTED.contains(script.myPlayer())) {
 			if (Constants.selectedTree.equals(Constants.MAGIC)) {
-				walk.walkPath(Constants.pathToBank);
+				walk.walkPath(Constants.pathToMagicBank);
+			} else if(Constants.BANK_AREA_CATHERBY.equals(Constants.BANK_AREA_SELECTED)) {
+				walk.walkPath(Constants.pathToBankCath);
 			} else {
 				script.localWalker.walk(getCenterPosition(Constants.BANK_AREA_SELECTED, 0));
 			}

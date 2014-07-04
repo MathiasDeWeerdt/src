@@ -24,7 +24,7 @@ import com.singlecore.scripts.treechopper.nodes.Ent;
 import com.singlecore.scripts.treechopper.nodes.Nest;
 import com.singlecore.scripts.treechopper.nodes.Walk;
 
-@ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.04)
+@ScriptManifest(author = "Single Core", info = "Chops tree's and banks them", logo = "", name = "TreeChopper", version = 0.05)
 public class TreeChopper extends Script implements MessageListener {
 
 	private ArrayList<AbstractNode> nodes = new ArrayList<AbstractNode>();
@@ -109,7 +109,7 @@ public class TreeChopper extends Script implements MessageListener {
 			g.drawString("$ Hour: " + time.calculatePerHour(Constants.logsChopped*Constants.SELECTED_PRICE), 392, 400);
 		}
 		
-		g.drawString("Version: " + 0.04, 10, 360);
+		g.drawString("Version: " + 0.05, 10, 360);
 		g.drawString("Status: " + Constants.status, 10, 380);
 		g.drawString("Nests: " + Constants.nestsFound, 10, 400);
 	}

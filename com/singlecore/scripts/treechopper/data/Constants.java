@@ -24,8 +24,43 @@ public class Constants {
 	public static final Area BANK_AREA_EDGEVILLE = new Area(3090, 3501, 3099, 3487);
 	public static final Area TREE_AREA_EDGEVILLE = new Area(3084, 3483, 3091, 3466);
 	
+	public static final Area BANK_AREA_CATHERBY = new Area(2805, 3447, 2813, 3437);
+	public static final Area TREE_AREA_CATHERBY = new Area(2754, 3441, 2782, 3421);
+	
 	public static Area BANK_AREA_SELECTED = null;
 	public static Area TREE_AREA_SELECTED = null;
+	
+	public static final Position[] pathToYewsCath = new Position[] {
+		new Position(2810, 3438, 0),
+		new Position(2810, 3435, 0),
+		new Position(2805, 3433, 0),
+		new Position(2802, 3433, 0),
+		new Position(2795, 3433, 0),
+		new Position(2791, 3433, 0),
+		new Position(2788, 3433, 0),
+		new Position(2783, 3433, 0),
+		new Position(2779, 3433, 0),
+		new Position(2774, 3432, 0),
+		new Position(2767, 3432, 0)
+	};
+	
+	public static final Position[] pathToBankCath = new Position[] {
+		new Position(2768, 3432, 0),
+		new Position(2770, 3433, 0),
+		new Position(2774, 3435, 0),
+		new Position(2777, 3436, 0),
+		new Position(2780, 3437, 0),
+		new Position(2786, 3438, 0),
+		new Position(2792, 3437, 0),
+		new Position(2793, 3435, 0),
+		new Position(2797, 3434, 0),
+		new Position(2802, 3432, 0),
+		new Position(2805, 3432, 0),
+		new Position(2807, 3432, 0),
+		new Position(2808, 3433, 0),
+		new Position(2810, 3437, 0),
+		new Position(2810, 3441, 0)
+	};
 	
 	public static final Position[] pathToMagics = new Position[] {
 			new Position(2725, 3490, 0),
@@ -46,7 +81,7 @@ public class Constants {
 			new Position(2698, 3423, 0)
 	};
 	
-	public static final Position[] pathToBank = new Position[] {
+	public static final Position[] pathToMagicBank = new Position[] {
 			new Position(2698, 3424, 0),
 			new Position(2701, 3429, 0),
 			new Position(2705, 3432, 0),
@@ -88,6 +123,7 @@ public class Constants {
 	public static final int MITHRIL_AXE = 1355;
 	public static final int ADAMANT_AXE = 1357;
 	public static final int RUNE_AXE = 1359;
+	public static final int DRAGON_AXE = 6739;
 	
 	public static int selectedAxe = 1359;
 	

@@ -59,6 +59,8 @@ public class UI extends JFrame {
 				Constants.selectedAxe = Constants.ADAMANT_AXE;
 			} else if(comboBox2.getSelectedItem().toString().equals("Rune")) {
 				Constants.selectedAxe = Constants.RUNE_AXE;
+			} else if(comboBox2.getSelectedItem().toString().equals("Dragon")) {
+				Constants.selectedAxe = Constants.DRAGON_AXE;
 			}
 			
 			if(comboBox1.getSelectedItem().toString().equals("Varrock-East | Logs")) {
@@ -111,6 +113,11 @@ public class UI extends JFrame {
 				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_EDGEVILLE;
 				Constants.selectedTree = Constants.YEW;
 				Constants.SELECTED_PRICE = PriceChecker.YEW_LOGS.getPrice();
+			} else if(comboBox1.getSelectedItem().toString().equals("Catherby | Yews")) {
+				Constants.BANK_AREA_SELECTED = Constants.BANK_AREA_CATHERBY;
+				Constants.TREE_AREA_SELECTED = Constants.TREE_AREA_CATHERBY;
+				Constants.selectedTree = Constants.YEW;
+				Constants.SELECTED_PRICE = PriceChecker.YEW_LOGS.getPrice();
 			}
 		}
 		
@@ -157,7 +164,8 @@ public class UI extends JFrame {
 			"Seers | Maples",
 			"Seers | Magics",
 			"Draynor | Willows",
-			"Edgeville | Yews"
+			"Edgeville | Yews",
+			"Catherby | Yews"
 		}));
 
 		//---- label2 ----
